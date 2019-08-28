@@ -15,3 +15,12 @@ def get_ransom_data(path, name="GANDCRAB KEY"):
         out = "".join(chain.from_iterable(takewhile(lambda x: x != end,f)
                                           for line in f if line == st))
     return base64.b64decode(out)
+
+def file_iterator(f, block_size, size):
+        f.seek(0, 0)
+        pos = 0
+        while pos < size:
+            rem = size-pos
+            rs = min(rem, block_size)
+            yield f.read(rs)
+            pos += rs

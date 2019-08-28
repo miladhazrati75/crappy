@@ -27,21 +27,10 @@ private key to decrypt the files.
 
 The RSA private user key is contained in the ransom, within the `GANDCRAB KEY` block.
 
-The tool in `scripts/decr_priv_user_rsa_key.py` is in charge of extracting and
-decrypting this key:
-
-    $ python3 ./scripts/decr_priv_user_rsa.py 
-    Usage: ./scripts/decr_priv_user_rsa.py ransom.txt rsa_user_private_file
-
-The RSA private user key will be written in the path given at `rsa_user_private_file`.
-
 ### File decryption
 
 Once the private RSA user key has been found, files can be decrypted thanks to
-the tool in `scripts/decr_file.py`:
-
-    $ python3 ./scripts/decr_file.py
-    Usage: ./scripts/decr_file.py rsa_user_private_file encrypted_file
+the tool in `scripts/decr_file.py`.
 
 The decrypted file will be written in the same directory as the original one, without the Gandcrab specific extension.
 
@@ -59,7 +48,7 @@ A sample of an encrypted file and a ransom file is in the `sample_run` directory
 Let's decrypt this file:
 
     $ pip3 install -r scripts/requirements.txt
-    $ python3 ./scripts/decr_priv_user_rsa.py sample_run/PYFCVQHUYJ-MANUAL.txt sample_run/rsa_user_priv
+    $ python3 decr_file.py
     [+] Priv key size: 1172
     [+] Salsa key: 74a92580b32a57cb2b9a3636a0ad141224fb6676da4e14c0edda1d0c73d091c2
     [+] Salsa nonce: 77dd722df221ec2e
@@ -72,8 +61,7 @@ Let's decrypt this file:
     [+] dq = 0x3856e1107de6806546004ec0a0513e757c406f74cf61280061dd29fcf0c75ed538075a05ba03903a73aa967f72fa2eb521126b9021dd1fe791cc342cf2809961e8ee0cdbd93cb90ac49fa259ff8479a7d89088a16a1f430b9a3f096d74f092879095514a31616988aba56c77df400ed17a5ada2d2f68968a71c70e268281d17b
     [+] iq = 0x2d3828289384001d1023c6b686b97f169cd90ec0e13d11fdb399d348c9520c91041ffe2eb043734069ac3b7f66dd20f12736de18f3525191389af9f8732e57226048268100c5c01da3a85d0ea2e81d60b7278ab4ab29ddc07926a4e1bfba7e8a1ab4dc09ef450fd372c9f64b2de033a0bc16057d74d5debf844604ec84e4f535
     [+] N  = 0xd7d1265bd35e078acfb3959799115f7a15ca0133f46bfd9451e570021edbd1c98e45d4c5ab81319ad2d7f9c2e75cfc3ef09e0cb8e47168356aa08f8cb004a08b77fe5fccaf4ae69c2f751229d2c5111920970935e34102f4d6e421999938c8e26b2cd6b696b19e3a77913a7b2fa6c7d3385a63b2e1c11debb7b0f185756f5c7b9427b2f18eda0bae42b90f3005d61d53b4a60849b52cb1d0e31d1e47c934fe8c1c2e7478d89c72e0c479e624b5f8dbefa1941eb8696c591da80013743c26af3e74bd25160cbf297bad4e10134d974202c8d0878a7adf25dce2db5f331ea31c07d48a08a389c9ce773f47e23bec58eadb97545afcb0aada31dcfa571204534b41
-    [+] RSA private user key written to 'sample_run/rsa_user_priv'
-    $ python3 ./scripts/decr_file.py sample_run/rsa_user_priv sample_run/test.docx.pyfcvqhuyj
+    [+] RSA private user key captured!!
     [+] Salsa20 key = a835c775aa03384d7fc99e40323ed085a41212ac4d526ac986d45937b16fd56b
     [+] Salsa20 nonce = e49db67c8dbb2401
     [+] Decrypting file...
